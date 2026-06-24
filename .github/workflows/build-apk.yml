@@ -30,9 +30,21 @@ jobs:
 
       - name: Build APK
         run: |
+          # Install latest cmdline-tools with aidl first
+          mkdir -p /tmp/cmdline-tools
+          cd /tmp/cmdline-tools
+          wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O ct.zip
+          unzip -q ct.zip
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk/cmdline-tools
+          mv $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest.bak 2>/dev/null || true
+          mv cmdline-tools $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest
+          cd -
+          # Accept licenses
+          yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          # Now build
           buildozer android debug
         env:
-          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_HOME: /home/runner/.buildozer/android/platform/android-sdk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
