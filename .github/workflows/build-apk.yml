@@ -30,22 +30,7 @@ jobs:
 
       - name: Build APK
         run: |
-          # Set ANDROID_HOME to where buildozer will install SDK
-          export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-          # Download and install latest cmdline-tools
-          mkdir -p $ANDROID_HOME/cmdline-tools
-          cd $ANDROID_HOME/cmdline-tools
-          wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O ct.zip
-          unzip -q ct.zip
-          mv cmdline-tools latest
-          # Accept licenses
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
-          # Install build-tools and platform-tools
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;34.0.0" "platform-tools"
-          # Now build
           buildozer android debug
-        env:
-          ANDROID_HOME: /home/runner/.buildozer/android/platform/android-sdk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
