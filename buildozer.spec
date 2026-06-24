@@ -30,7 +30,10 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python3==3.10.13,kivy==2.3.0
+
+# (str) Custom source for kivy
+#requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
@@ -109,3 +112,35 @@ android.accept_sdk_license = True
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a, armeabi-v7a
+
+#
+# iOS specific
+#
+
+# (str) Presplash of the application (using filename given in presplash.filename above)
+#ios.presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) Icon of the application (using filename given in icon.filename above)
+#ios.icon.filename = %(source.dir)s/data/icon.png
+
+# (list) Supported orientations
+# Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
+ios.orientation = portrait
+
+# (list) Bundle URL schemes that your app supports
+#ios.url_schemes = myapp,com.myapp
+
+# (list) iOS deployment target (minimum iOS version)
+ios.min_version = 14.0
+
+# (str) Entitlements file to use
+#ios.entitlements = %(source.dir)s/data/Entitlements.plist
+
+# (str) Provisioning profile path
+#ios.provisioning_profile = %(source.dir)s/data/ProvisioningProfile.mobileprovision
+
+# (str) Code signing identity for iOS
+#ios.codesign.development_identity = "iPhone Developer: ..."
+
+# (str) Code signing identity for release
+#ios.codesign.production_identity = "iPhone Distribution: ..."
