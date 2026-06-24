@@ -24,18 +24,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install kivy==2.3.0 buildozer cython==3.0.11
 
-      - name: Accept Android SDK licenses
-        run: |
-          mkdir -p $HOME/.android
-          echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > $HOME/.android/android-release-keystore
-
       - name: Prepare project
         run: |
           cp calculator_kivy.py main.py
 
       - name: Build APK
         run: |
-          yes | buildozer android debug
+          # Accept all Android SDK licenses first
+          yes | sdkmanager --licenses --sdk_root=$ANDROID_HOME 2>/dev/null || true
+          # Then build
+          buildozer android debug
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
 
