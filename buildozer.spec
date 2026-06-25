@@ -40,7 +40,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.1,plyer,jnius
+requirements = python3,kivy==2.3.1
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
@@ -263,7 +263,7 @@ android.enable_androidx = True
 #android.wakelock = False
 
 # (list) Android application meta-data to set (key=value format)
-android.meta_data = android.max_aspect=2.4,android.allow_backup=false
+#android.meta_data =
 
 # (list) Android library project to add (will be added in the
 # project.properties automatically.)
@@ -316,7 +316,7 @@ android.debug_artifact = apk
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
 # when an update is due and you just want to test/build your package
-android.skip_update = False
+# android.skip_update = False
 
 #
 # Python for android (p4a) specific

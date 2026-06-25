@@ -17,26 +17,6 @@ from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 from kivy.metrics import dp
 from kivy.utils import get_color_from_hex
-from kivy.clock import Clock
-
-# 安卓平台环境判断
-IS_ANDROID = False
-try:
-    from android import activity
-    IS_ANDROID = True
-except ImportError:
-    pass
-
-
-def android_resume_fix(dt):
-    """切后台返回前台重建EGL视口，解决黑屏、触摸失效"""
-    if not IS_ANDROID:
-        return
-    try:
-        Window.update_viewport()
-        Window.fullscreen = False
-    except Exception:
-        pass
 
 
 class CalculatorAppCore:
@@ -527,18 +507,9 @@ class CalculatorScreen(BoxLayout):
 class CalculatorKivyApp(App):
     def build(self):
         Window.clearcolor = COLORS["bg"]
-        # Android 后台恢复定时修复
-        Clock.schedule_interval(android_resume_fix, 2.0)
         core = CalculatorAppCore()
         return CalculatorScreen(core)
 
 
 if __name__ == "__main__":
-    # Android 工作目录修正
-    if IS_ANDROID:
-        try:
-            from android.storage import app_storage_path
-            os.chdir(app_storage_path())
-        except Exception:
-            pass
     CalculatorKivyApp().run()
